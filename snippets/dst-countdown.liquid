@@ -1,0 +1,34 @@
+{%- comment -%}
+  Usage:
+    {% render 'dst-countdown', end: 'YYYY-MM-DD HH:MM' %}
+    {% render 'dst-countdown', end: '2025-12-31 23:59', size: 'lg', show_days: true %}
+
+  Params:
+    - end: ISO-ish date string (required)
+    - size: 'sm' | 'md' | 'lg' (default: 'md')
+    - show_days: boolean (default: true)
+{%- endcomment -%}
+
+{%- if end != blank -%}
+  {%- assign size_class = size | default: 'md' -%}
+  <dst-countdown class="dst-countdown dst-countdown--{{ size_class }}" end="{{ end }}">
+    {%- if show_days != false -%}
+      <span class="dst-countdown__unit">
+        <span class="dst-countdown__num" data-cd-days>00</span>
+        <span class="dst-countdown__label">{{ 'sections.dst_countdown.days' | t | default: 'Days' }}</span>
+      </span>
+    {%- endif -%}
+    <span class="dst-countdown__unit">
+      <span class="dst-countdown__num" data-cd-hours>00</span>
+      <span class="dst-countdown__label">{{ 'sections.dst_countdown.hours' | t | default: 'Hrs' }}</span>
+    </span>
+    <span class="dst-countdown__unit">
+      <span class="dst-countdown__num" data-cd-mins>00</span>
+      <span class="dst-countdown__label">{{ 'sections.dst_countdown.mins' | t | default: 'Min' }}</span>
+    </span>
+    <span class="dst-countdown__unit">
+      <span class="dst-countdown__num" data-cd-secs>00</span>
+      <span class="dst-countdown__label">{{ 'sections.dst_countdown.secs' | t | default: 'Sec' }}</span>
+    </span>
+  </dst-countdown>
+{%- endif -%}

@@ -1,0 +1,189 @@
+.dst-hb {
+  padding: var(--dst-hb-pt, 20px) 0 var(--dst-hb-pb, 0);
+}
+
+.dst-hb__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+@media (min-width: 990px) {
+  .dst-hb__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.28fr) minmax(0, 0.3fr);
+  }
+}
+
+.dst-hb--full .dst-hb__grid {
+  max-width: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* --- Slider --- */
+.dst-hb__main {
+  display: block;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgb(var(--color-background));
+}
+
+.dst-hb__slides {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.dst-hb__slides::-webkit-scrollbar {
+  display: none;
+}
+
+.dst-hb__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+}
+
+.dst-hb__slide-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.dst-hb__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dst-hb__img--mobile {
+  display: none;
+}
+
+@media (max-width: 749px) {
+  .dst-hb__img--desktop {
+    display: none;
+  }
+  .dst-hb__img--mobile {
+    display: block;
+  }
+}
+
+/* --- Dots --- */
+.dst-hb__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  z-index: 2;
+}
+
+.dst-hb__dot {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.dst-hb__dot:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+.dst-hb__dot.is-active {
+  background: rgb(var(--color-foreground));
+  transform: scale(1.15);
+}
+
+/* --- Middle promo block --- */
+.dst-hb__middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.dst-hb__middle-icon {
+  max-width: 64px;
+  height: auto;
+}
+
+.dst-hb__middle-text {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.dst-hb__middle-subtext {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.dst-hb__middle-link {
+  margin-top: auto;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Right offer card --- */
+.dst-hb__right {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dst-hb__right-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dst-hb__right-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 989px) {
+  .dst-hb__right-img {
+    max-height: 240px;
+  }
+}
+
+/* Mobile stacking */
+@media (max-width: 749px) {
+  .dst-hb__grid {
+    gap: 8px;
+  }
+  .dst-hb__main,
+  .dst-hb__middle,
+  .dst-hb__right {
+    border-radius: 10px;
+  }
+}

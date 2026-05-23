@@ -1,0 +1,37 @@
+{%- comment -%}
+  Buy Now button for product cards.
+
+  Usage:
+    {% render 'dst-buy-now', card_product: card_product, section_id: section.id %}
+
+  Behavior:
+    - Single-variant product → POSTs to /cart/add with name="checkout" → straight to checkout.
+    - Multi-variant product → links to the product page so the customer can pick options.
+    - Sold-out product → not rendered.
+{%- endcomment -%}
+
+{%- liquid
+  assign p = card_product
+  assign form_id = 'dst-buy-now-' | append: section_id | append: '-' | append: p.id
+-%}
+
+{%- if p.available -%}
+  {%- if p.variants_count == 1 -%}
+    <form action="{{ routes.cart_url }}/add" method="post" enctype="multipart/form-data" class="dst-buy-now">
+      <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button
+        id="{{ form_id }}-submit"
+        type="submit"
+        name="checkout"
+        class="dst-buy-now__button button button--full-width button--primary"
+      >
+        {{ 'products.product.buy_now' | t | default: 'Buy now' }}
+      </button>
+    </form>
+  {%- else -%}
+    <a href="{{ p.url }}" class="dst-buy-now__link button button--full-width button--primary">
+      {{ 'products.product.buy_now' | t | default: 'Buy now' }}
+    </a>
+  {%- endif -%}
+{%- endif -%}

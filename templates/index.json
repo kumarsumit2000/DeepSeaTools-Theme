@@ -1,0 +1,286 @@
+{
+  "sections": {
+    "home_banner": {
+      "type": "dst-home-banner",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "aria_label": "Featured marine gear"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "aria_label": "New arrivals for the season"
+          }
+        }
+      },
+      "block_order": ["slide-1", "slide-2"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "width": "full",
+        "auto_seconds": 6,
+        "accessibility_label": "Home banner",
+        "middle_bg_color": "#0F2D44",
+        "middle_text_color": "#FFFFFF",
+        "middle_text": "Free shipping over $99",
+        "middle_subtext": "Delivered to most major ports in 3–5 business days.",
+        "middle_link_label": "Read shipping policy",
+        "middle_link": "/policies/shipping-policy",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "gallery": {
+      "type": "dst-gallery-image",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Top sellers",
+            "heading": "Crab pots & traps",
+            "subheading": "Heavy-duty steel mesh, built to last.",
+            "button_label": "Shop traps",
+            "button_style": "solid",
+            "text_color": "#FFFFFF",
+            "text_align": "bottom-left"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "New arrivals",
+            "heading": "Sounders & sonar",
+            "subheading": "Find fish faster with our latest electronics.",
+            "button_label": "View electronics",
+            "button_style": "solid",
+            "text_color": "#FFFFFF",
+            "text_align": "bottom-left"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Restock",
+            "heading": "Rigging & lines",
+            "subheading": "Stainless steel cable, marine rope, and shackles.",
+            "button_label": "Browse rigging",
+            "button_style": "solid",
+            "text_color": "#FFFFFF",
+            "text_align": "bottom-left"
+          }
+        }
+      },
+      "block_order": ["card-1", "card-2", "card-3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Shop by category",
+        "full_width": false,
+        "columns_desktop": 3,
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "icon_box": {
+      "type": "dst-icon-box",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "title": "Built for the sea",
+            "text": "<p>Marine-grade materials tested in real conditions, not lab specs.</p>"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "title": "Honest support",
+            "text": "<p>Talk to people who use this gear themselves. Real recommendations, no upsells.</p>"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "title": "30-day returns",
+            "text": "<p>Not the right fit? Send it back within 30 days for a full refund.</p>"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "title": "Stocked & ready",
+            "text": "<p>Live inventory on every listing. If it shows in stock, it ships.</p>"
+          }
+        }
+      },
+      "block_order": ["item-1", "item-2", "item-3", "item-4"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Why crews choose DeepSeaTools",
+        "subheading": "",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "collection_tabs": {
+      "type": "dst-collection-tabs",
+      "blocks": {
+        "tab-1": {
+          "type": "tab",
+          "settings": { "title": "Top sellers" }
+        },
+        "tab-2": {
+          "type": "tab",
+          "settings": { "title": "New arrivals" }
+        },
+        "tab-3": {
+          "type": "tab",
+          "settings": { "title": "On sale" }
+        }
+      },
+      "block_order": ["tab-1", "tab-2", "tab-3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Browse our catalog",
+        "subheading": "",
+        "columns_desktop": 4,
+        "products_to_show": 8,
+        "show_view_all": true,
+        "dst_buy_now": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "deal_of_day": {
+      "type": "dst-deal-of-day",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "eyebrow": "Limited time",
+        "heading": "Deal of the day",
+        "subheading": "<p>One featured product. Limited stock at this price. Ends when the timer hits zero.</p>",
+        "button_label": "Shop the deal",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "flash_deals": {
+      "type": "dst-flash-deals",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Flash deals",
+        "subheading": "Time-limited prices on hand-picked gear.",
+        "columns_desktop": 4,
+        "show_days": true,
+        "dst_buy_now": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best sellers",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "dst_buy_now": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "testimonials": {
+      "type": "dst-testimonials",
+      "blocks": {
+        "quote-1": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>The crab pots I ordered arrived faster than expected and the build quality is excellent. Used them on a three-week trip and they held up to everything.</p>",
+            "name": "Marcus Bellweather",
+            "role": "Verified Buyer",
+            "rating": 5
+          }
+        },
+        "quote-2": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>Customer service was responsive when I had a question about replacement parts. Got a clear answer within a day. Will order from DeepSeaTools again.</p>",
+            "name": "Priya Anand",
+            "role": "Charter Captain",
+            "rating": 5
+          }
+        },
+        "quote-3": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>Solid gear at a fair price. The sounder I bought has worked flawlessly for two seasons. Packaging was thoughtful — nothing damaged in shipping.</p>",
+            "name": "Henrik Vogel",
+            "role": "Commercial Fisher",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["quote-1", "quote-2", "quote-3"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "Customer stories",
+        "heading": "Trusted on the water",
+        "subheading": "Skippers, divers, and commercial crews keep coming back. Here's why.",
+        "columns_desktop": 3,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "image_grid": {
+      "type": "dst-image-grid",
+      "blocks": {
+        "img-1": { "type": "image", "settings": { "caption": "On deck" } },
+        "img-2": { "type": "image", "settings": { "caption": "Hauled in" } },
+        "img-3": { "type": "image", "settings": { "caption": "Pre-dawn" } },
+        "img-4": { "type": "image", "settings": { "caption": "Wheelhouse" } },
+        "img-5": { "type": "image", "settings": { "caption": "First catch" } },
+        "img-6": { "type": "image", "settings": { "caption": "Sunset" } }
+      },
+      "block_order": ["img-1", "img-2", "img-3", "img-4", "img-5", "img-6"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "From the crew",
+        "subheading": "Real customers, real boats. Tag #DeepSeaTools to be featured.",
+        "full_width": false,
+        "columns_desktop": 6,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "home_banner",
+    "gallery",
+    "icon_box",
+    "collection_tabs",
+    "deal_of_day",
+    "flash_deals",
+    "featured_collection",
+    "testimonials",
+    "image_grid"
+  ]
+}

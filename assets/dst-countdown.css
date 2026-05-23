@@ -1,0 +1,48 @@
+.dst-countdown {
+  display: inline-flex;
+  gap: 8px;
+  align-items: stretch;
+  font-variant-numeric: tabular-nums;
+}
+
+.dst-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 8px 10px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-radius: 6px;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  line-height: 1;
+}
+
+.dst-countdown__num {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.dst-countdown__label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+/* Sizes */
+.dst-countdown--sm .dst-countdown__unit { min-width: 38px; padding: 6px 8px; }
+.dst-countdown--sm .dst-countdown__num { font-size: 0.9rem; }
+.dst-countdown--sm .dst-countdown__label { font-size: 0.55rem; }
+
+.dst-countdown--lg { gap: 12px; }
+.dst-countdown--lg .dst-countdown__unit { min-width: 72px; padding: 14px 16px; }
+.dst-countdown--lg .dst-countdown__num { font-size: 1.875rem; }
+.dst-countdown--lg .dst-countdown__label { font-size: 0.75rem; }
+
+.dst-countdown.is-ended .dst-countdown__num {
+  opacity: 0.4;
+}

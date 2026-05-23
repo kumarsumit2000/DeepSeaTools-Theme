@@ -1,0 +1,15 @@
+.dst-buy-now,
+.dst-buy-now__link {
+  display: block;
+  margin: 0.75rem 0 0;
+}
+
+.dst-buy-now__button,
+.dst-buy-now__link {
+  width: 100%;
+}
+
+.card--horizontal .dst-buy-now,
+.card--horizontal .dst-buy-now__link {
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,152 @@
+{{ 'section-dst-gallery-image.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sec = section.settings
+-%}
+
+<div
+  class="dst-gallery color-{{ sec.color_scheme }} gradient{% if sec.full_width %} dst-gallery--full{% endif %}"
+  style="--dst-gal-pt: {{ sec.padding_top }}px; --dst-gal-pb: {{ sec.padding_bottom }}px;"
+>
+  <div class="{% if sec.full_width %}dst-gallery__container--full{% else %}page-width{% endif %}">
+
+    {%- if sec.heading != blank -%}
+      <h2 class="dst-gallery__heading h2">{{ sec.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul
+        class="dst-gallery__grid"
+        style="--dst-gal-cols-d: {{ sec.columns_desktop }};"
+        role="list"
+      >
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'card' -%}
+            {%- assign b = block.settings -%}
+            <li class="dst-gallery__item" {{ block.shopify_attributes }}>
+              <article class="dst-gallery__card dst-gallery__card--{{ b.text_align }}">
+                {%- if b.link != blank -%}
+                  <a class="dst-gallery__link" href="{{ b.link }}" aria-label="{{ b.aria_label | default: b.heading | strip_html | escape }}"></a>
+                {%- endif -%}
+                {%- if b.image != blank -%}
+                  <img
+                    class="dst-gallery__img"
+                    src="{{ b.image | image_url: width: 900 }}"
+                    srcset="{{ b.image | image_url: width: 450 }} 450w, {{ b.image | image_url: width: 700 }} 700w, {{ b.image | image_url: width: 900 }} 900w, {{ b.image | image_url: width: 1200 }} 1200w"
+                    sizes="(min-width: 990px) {{ 100 | divided_by: sec.columns_desktop }}vw, 100vw"
+                    width="{{ b.image.width }}"
+                    height="{{ b.image.height }}"
+                    alt="{{ b.image.alt | default: b.heading | strip_html | escape }}"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="dst-gallery__placeholder">
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {%- endif -%}
+
+                <div class="dst-gallery__overlay" style="color: {{ b.text_color }};">
+                  {%- if b.eyebrow != blank -%}
+                    <p class="dst-gallery__eyebrow">{{ b.eyebrow }}</p>
+                  {%- endif -%}
+                  {%- if b.heading != blank -%}
+                    <h3 class="dst-gallery__title">{{ b.heading }}</h3>
+                  {%- endif -%}
+                  {%- if b.subheading != blank -%}
+                    <p class="dst-gallery__subtitle">{{ b.subheading }}</p>
+                  {%- endif -%}
+                  {%- if b.button_label != blank -%}
+                    <span class="dst-gallery__cta {% if b.button_style == 'solid' %}button button--primary{% else %}dst-gallery__cta--link{% endif %}">
+                      {{ b.button_label }}
+                    </span>
+                  {%- endif -%}
+                </div>
+              </article>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image Gallery",
+  "tag": "section",
+  "class": "section section-dst-gallery-image",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "background-1" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1, "max": 4, "step": 1, "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 36, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 36, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Image card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Square or 3:4 portrait recommended" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "aria_label", "label": "Link label for screen readers" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Featured" },
+        { "type": "text", "id": "subheading", "label": "Subheading" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "solid",
+          "options": [
+            { "value": "solid", "label": "Solid button" },
+            { "value": "link", "label": "Underlined link" }
+          ]
+        },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text position",
+          "default": "bottom-left",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "center", "label": "Center" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom center" }
+          ]
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Image Gallery",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

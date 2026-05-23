@@ -1,0 +1,142 @@
+{{ 'section-dst-icon-box.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sec = section.settings
+-%}
+
+<div
+  class="dst-icon-box color-{{ sec.color_scheme }} gradient"
+  style="--dst-ib-pt: {{ sec.padding_top }}px; --dst-ib-pb: {{ sec.padding_bottom }}px;"
+>
+  <div class="page-width">
+
+    {%- if sec.heading != blank -%}
+      <h2 class="dst-icon-box__heading h2">{{ sec.heading }}</h2>
+    {%- endif -%}
+
+    {%- if sec.subheading != blank -%}
+      <p class="dst-icon-box__subheading">{{ sec.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul
+        class="dst-icon-box__grid"
+        style="--dst-ib-columns-d: {{ sec.columns_desktop }}; --dst-ib-columns-m: {{ sec.columns_mobile }};"
+        role="list"
+      >
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <li class="dst-icon-box__item" {{ block.shopify_attributes }}>
+              <div class="dst-icon-box__card">
+                {%- if block.settings.icon != blank -%}
+                  <img
+                    class="dst-icon-box__icon"
+                    src="{{ block.settings.icon | image_url: width: 96 }}"
+                    width="{{ block.settings.icon.width }}"
+                    height="{{ block.settings.icon.height }}"
+                    alt="{{ block.settings.icon.alt | default: block.settings.title | strip_html | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="dst-icon-box__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="dst-icon-box__text rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+                  <a class="dst-icon-box__link" href="{{ block.settings.link }}">
+                    {{ block.settings.link_label }}
+                    <span class="visually-hidden">{{ block.settings.title | strip_html | escape }}</span>
+                  </a>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Icon Box",
+  "tag": "section",
+  "class": "section section-dst-icon-box",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1, "max": 6, "step": 1, "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon", "info": "Square SVG/PNG, around 48–96 px" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Feature title" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Briefly describe this feature.</p>"
+        },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Icon Box",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

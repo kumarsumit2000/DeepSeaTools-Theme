@@ -1,0 +1,49 @@
+.dst-deals {
+  padding: var(--dst-deals-pt, 48px) 0 var(--dst-deals-pb, 48px);
+}
+
+.dst-deals__heading {
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.dst-deals__subheading {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  max-width: 60ch;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.dst-deals__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 750px) {
+  .dst-deals__grid {
+    grid-template-columns: repeat(var(--dst-deals-cols-d, 4), minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+.dst-deals__item { margin: 0; }
+
+.dst-deals__card {
+  position: relative;
+}
+
+.dst-deals__countdown-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.dst-deals__empty {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(var(--color-foreground), 0.6);
+}

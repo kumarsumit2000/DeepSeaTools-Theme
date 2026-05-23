@@ -1,0 +1,136 @@
+{{ 'section-dst-deal-of-day.css' | asset_url | stylesheet_tag }}
+{{ 'dst-countdown.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'dst-countdown.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign sec = section.settings
+  assign p = all_products[sec.product]
+-%}
+
+<div
+  class="dst-dod color-{{ sec.color_scheme }} gradient"
+  style="--dst-dod-pt: {{ sec.padding_top }}px; --dst-dod-pb: {{ sec.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="dst-dod__grid">
+
+      <div class="dst-dod__media">
+        {%- if p != blank and p.featured_image != blank -%}
+          <a href="{{ p.url }}" class="dst-dod__media-link">
+            <img
+              src="{{ p.featured_image | image_url: width: 1200 }}"
+              srcset="{{ p.featured_image | image_url: width: 600 }} 600w, {{ p.featured_image | image_url: width: 900 }} 900w, {{ p.featured_image | image_url: width: 1200 }} 1200w"
+              sizes="(min-width: 750px) 50vw, 100vw"
+              width="{{ p.featured_image.width }}"
+              height="{{ p.featured_image.height }}"
+              alt="{{ p.featured_image.alt | default: p.title | escape }}"
+              loading="lazy"
+            >
+          </a>
+        {%- elsif sec.fallback_image != blank -%}
+          <img
+            src="{{ sec.fallback_image | image_url: width: 1200 }}"
+            width="{{ sec.fallback_image.width }}"
+            height="{{ sec.fallback_image.height }}"
+            alt="{{ sec.fallback_image.alt | default: sec.heading | escape }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="dst-dod__placeholder">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="dst-dod__body">
+        {%- if sec.eyebrow != blank -%}
+          <p class="dst-dod__eyebrow">{{ sec.eyebrow }}</p>
+        {%- endif -%}
+        {%- if sec.heading != blank -%}
+          <h2 class="dst-dod__heading h1">{{ sec.heading }}</h2>
+        {%- endif -%}
+        {%- if sec.subheading != blank -%}
+          <div class="dst-dod__subheading rte">{{ sec.subheading }}</div>
+        {%- endif -%}
+
+        {%- if p != blank -%}
+          <div class="dst-dod__price">
+            {%- if p.compare_at_price > p.price -%}
+              <span class="dst-dod__price-sale">{{ p.price | money }}</span>
+              <s class="dst-dod__price-compare">{{ p.compare_at_price | money }}</s>
+            {%- else -%}
+              <span class="dst-dod__price-sale">{{ p.price | money }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if sec.end_time != blank -%}
+          <div class="dst-dod__countdown-wrap">
+            {% render 'dst-countdown', end: sec.end_time, size: 'lg', show_days: true %}
+          </div>
+        {%- endif -%}
+
+        {%- if sec.button_label != blank -%}
+          {%- assign btn_url = sec.button_link | default: p.url -%}
+          {%- if btn_url != blank -%}
+            <a href="{{ btn_url }}" class="button button--primary dst-dod__cta">
+              {{ sec.button_label }}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Deal of the Day",
+  "tag": "section",
+  "class": "section section-dst-deal-of-day",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Limited time" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Deal of the Day" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>One product. One day only. Limited stock at this price.</p>" },
+    {
+      "type": "header",
+      "content": "Product & timer"
+    },
+    { "type": "product", "id": "product", "label": "Featured product" },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback image",
+      "info": "Used if no product is set or the product has no image."
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "Sale ends",
+      "info": "Format YYYY-MM-DD HH:MM (24-hour, UTC). Example: 2026-09-15 23:59"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the deal" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave blank to use the product's URL." },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 48, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 48, "unit": "px" }
+  ],
+  "presets": [
+    { "name": "Deal of the Day" }
+  ]
+}
+{% endschema %}
